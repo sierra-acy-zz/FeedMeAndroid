@@ -1,5 +1,6 @@
 package sierraacy.feedme;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -13,6 +14,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -24,7 +27,8 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getItemId() == R.id.btn_settings) {
             //open settings
-            Toast.makeText(this, "Settings!", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(this, EditRestaurant.class);
+            startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }
