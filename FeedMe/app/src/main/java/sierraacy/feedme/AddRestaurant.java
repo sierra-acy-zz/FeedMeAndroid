@@ -36,12 +36,9 @@ public class AddRestaurant extends AppCompatActivity {
         typeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         type.setAdapter(typeAdapter);
 
-        Intent intent = getIntent();
-
         save.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-
                 String restName = name.getText().toString();
                 String restStyle = style.getSelectedItem().toString();
                 String restType = type.getSelectedItem().toString();
@@ -52,7 +49,8 @@ public class AddRestaurant extends AppCompatActivity {
                 Bundle b = new Bundle();
                 b.putSerializable("newRest", newRest);
                 intent.putExtras(b);
-                startActivity(intent);
+                setResult(RESULT_OK, intent);
+                finish();
             }
 
         });

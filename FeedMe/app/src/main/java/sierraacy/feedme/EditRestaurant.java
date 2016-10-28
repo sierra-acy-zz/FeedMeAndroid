@@ -36,12 +36,6 @@ public class EditRestaurant extends AppCompatActivity {
         setContentView(R.layout.activity_edit_restaurant);
 //        ListAdapter listAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, restaurantNames);
         listAdapter = new DynamicAdapter(this);
-//        ListAdapter listAdapter = null;
-//        try {
-//            listAdapter = new DynamicAdapter(this);
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
         ListView listView = (ListView)findViewById(R.id.restaurant_list);
         listView.setAdapter(listAdapter);
 
@@ -60,6 +54,7 @@ public class EditRestaurant extends AppCompatActivity {
             if(requestCode == 1){
                 Restaurant rest = (Restaurant) intent.getSerializableExtra("newRest");
                 listAdapter.addItem(rest);
+                listAdapter.notifyDataSetChanged();
             }
         }
     }

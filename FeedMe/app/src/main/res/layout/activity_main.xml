@@ -20,7 +20,7 @@
         android:paddingBottom="10dp"
         android:paddingStart="90dp"
         android:paddingEnd="90dp"
-        android:background="@drawable/button_rounded_corners"
+        android:background="@drawable/feedme_button"
         android:text="FEED ME"
         android:textSize="60sp"
         android:textColor="#FFFFFF"/>
@@ -73,6 +73,7 @@
         android:padding="15dp"
         android:text="Advanced Settings"
         android:textSize="25sp"
-        android:textAllCaps="false"/>
+        android:textAllCaps="false"
+        android:background="@drawable/gray_rounded"/>
 
 </RelativeLayout>

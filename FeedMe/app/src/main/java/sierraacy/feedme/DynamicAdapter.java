@@ -68,17 +68,10 @@ public class DynamicAdapter extends BaseAdapter {
     }
 
     protected View bindView(View theView, int position, ViewGroup parent) {
-//        String text = (String) String.valueOf(getItem(position));
         Restaurant restaurant = (Restaurant) getItem(position);
 
         TextView theTextView = (TextView) theView.findViewById(R.id.restaurant_name);
         theTextView.setText(restaurant.name);
-
-//        ImageButton editBtn = (ImageButton) theView.findViewById(R.id.btn_edit);
-//        editBtn.setImageResource(R.drawable.edit_icon);
-
-//        ImageButton deleteBtn = (ImageButton) theView.findViewById(R.id.btn_delete);
-//        deleteBtn.setImageResource(R.drawable.delete_icon);
 
         return theView;
     }
