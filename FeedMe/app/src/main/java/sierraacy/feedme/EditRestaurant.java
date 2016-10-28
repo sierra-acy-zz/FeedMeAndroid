@@ -18,7 +18,7 @@ import java.util.List;
 
 public class EditRestaurant extends AppCompatActivity {
     Button add;
-    ListAdapter listAdapter;
+    DynamicAdapter listAdapter;
     String[] restaurantNames = {
             "Taco Bell",
             "Chick-fil-a",
