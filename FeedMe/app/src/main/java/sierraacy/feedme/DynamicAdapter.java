@@ -11,7 +11,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 /**
  * Created by sisis on 10/25/2016.
@@ -19,20 +22,22 @@ import org.json.JSONObject;
 
 public class DynamicAdapter extends BaseAdapter {
     private LayoutInflater layoutInflater;
-    private JSONArray restaruantList = new JSONArray();
+    private ArrayList<Restaurant> restaruantList = new ArrayList<>();
 
     public DynamicAdapter(Context mContext) {
         layoutInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        Restaurant r = new Restaurant("Taco Bell", "fast-food", "fast-food", 1);
+        addItem(r);
     }
 
-    public void addItem(final JSONObject restaurant) {
-        restaruantList.put(restaurant);
+    public void addItem(final Restaurant restaurant) {
+        restaruantList.add(restaurant);
         notifyDataSetChanged();
     }
 
     public void removeItem(int position) {
         restaruantList.remove(position);
-        if (restaruantList.length() > 0) {
+        if (restaruantList.size() > 0) {
             notifyDataSetChanged();
         } else {
             notifyDataSetInvalidated();
@@ -41,17 +46,17 @@ public class DynamicAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return restaruantList.length();
+        return restaruantList.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return restaruantList.length();
+        return restaruantList.get(position);
     }
 
     @Override
     public long getItemId(int position) {
-        return 0;
+        return position;
     }
 
     @Override
@@ -63,17 +68,17 @@ public class DynamicAdapter extends BaseAdapter {
     }
 
     protected View bindView(View theView, int position, ViewGroup parent) {
-        String text = (String) String.valueOf(getItem(position));
+//        String text = (String) String.valueOf(getItem(position));
         Restaurant restaurant = (Restaurant) getItem(position);
 
         TextView theTextView = (TextView) theView.findViewById(R.id.restaurant_name);
         theTextView.setText(restaurant.name);
 
-        ImageButton editBtn = (ImageButton) theView.findViewById(R.id.btn_edit);
-        editBtn.setImageResource(R.drawable.edit_icon);
+//        ImageButton editBtn = (ImageButton) theView.findViewById(R.id.btn_edit);
+//        editBtn.setImageResource(R.drawable.edit_icon);
 
-        ImageButton deleteBtn = (ImageButton) theView.findViewById(R.id.btn_delete);
-        deleteBtn.setImageResource(R.drawable.delete_icon);
+//        ImageButton deleteBtn = (ImageButton) theView.findViewById(R.id.btn_delete);
+//        deleteBtn.setImageResource(R.drawable.delete_icon);
 
         return theView;
     }

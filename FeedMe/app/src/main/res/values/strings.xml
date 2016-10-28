@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">FeedMe</string>
+    <string-array name="styles_array">
+        <item>Select a style!</item>
+        <item>American</item>
+        <item>Chinese</item>
+        <item>Italian</item>
+        <item>Mexican</item>
+        <item>Deli</item>
+        <item>Buffet</item>
+    </string-array>
+    <string-array name="dining_array">
+        <item>Select the dining type!</item>
+        <item>Fast-Food</item>
+        <item>Sit-Down</item>
+        <item>Takeout</item>
+    </string-array>
 </resources>

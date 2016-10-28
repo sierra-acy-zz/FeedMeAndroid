@@ -1,12 +1,13 @@
 package sierraacy.feedme;
 
+import java.io.Serializable;
 import java.net.URL;
 
 /**
  * Created by sisis on 10/25/2016.
  */
 
-public class Restaurant {
+public class Restaurant implements Serializable {
     String name;
     String style;
     String diningType;
