@@ -14,6 +14,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -26,10 +27,12 @@ public class DynamicAdapter extends BaseAdapter {
 
     public DynamicAdapter(Context mContext) {
         layoutInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        Restaurant r = new Restaurant("Taco Bell", "fast-food", "fast-food", 1);
-        addItem(r);
     }
 
+    public void createList(ArrayList<Restaurant> restaurantList) {
+        this.restaruantList = restaurantList;
+
+    }
     public void addItem(final Restaurant restaurant) {
         restaruantList.add(restaurant);
         notifyDataSetChanged();
@@ -57,6 +60,10 @@ public class DynamicAdapter extends BaseAdapter {
     @Override
     public long getItemId(int position) {
         return position;
+    }
+
+    public ArrayList<Restaurant> getRestaruantList(){
+        return restaruantList;
     }
 
     @Override

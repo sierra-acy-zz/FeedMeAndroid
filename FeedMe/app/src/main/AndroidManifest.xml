@@ -18,7 +18,8 @@
         <activity
             android:name=".EditRestaurant"
             android:parentActivityName=".MainActivity" />
-        <activity android:name=".AddRestaurant"></activity>
+        <activity android:name=".AddRestaurant" />
+        <activity android:name=".Main2Activity"></activity>
     </application>
 
 </manifest>
