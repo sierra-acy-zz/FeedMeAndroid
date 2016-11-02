@@ -65,15 +65,7 @@ public class EditRestaurant extends AppCompatActivity {
                 finish();
             }
 
-            public JSONArray jsonArrayify(ArrayList<Restaurant> restaurants) {
-                JSONArray jsonArray = new JSONArray();
-                for(int i = 0; i < restaurants.size(); i++) {
-                    jsonArray.put(restaurants.get(i));
-                }
-
-                return jsonArray;
-            }
-
+            /* Gson API code pulled from : http://www.vogella.com/tutorials/JavaLibrary-Gson/article.html */
             public boolean writeFile(ArrayList<Restaurant> restaurants) {
                 OutputStreamWriter outputStreamWriter = null;
                 boolean success = false;
