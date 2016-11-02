@@ -10,12 +10,24 @@ import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.io.Serializable;
+import java.lang.reflect.Array;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
+
+import static android.R.attr.data;
 
 public class EditRestaurant extends AppCompatActivity {
     Button add;
@@ -45,10 +57,41 @@ public class EditRestaurant extends AppCompatActivity {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ArrayList<Restaurant> restaurants = listAdapter.getRestaruantList();
+                writeFile(restaurants);
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                intent.putExtra("restaurantList", listAdapter.getRestaruantList());
+                intent.putExtra("restaurantList", restaurants);
                 setResult(RESULT_OK, intent);
                 finish();
+            }
+
+            public JSONArray jsonArrayify(ArrayList<Restaurant> restaurants) {
+                JSONArray jsonArray = new JSONArray();
+                for(int i = 0; i < restaurants.size(); i++) {
+                    jsonArray.put(restaurants.get(i));
+                }
+
+                return jsonArray;
+            }
+
+            public boolean writeFile(ArrayList<Restaurant> restaurants) {
+                OutputStreamWriter outputStreamWriter = null;
+                boolean success = false;
+                try {
+                    Gson gson = new Gson();
+                    Type type = new TypeToken<ArrayList<Restaurant>>() {}.getType();
+                    String json = gson.toJson(restaurants, type);
+                    System.out.println(json);
+                    outputStreamWriter = new OutputStreamWriter(openFileOutput("feedme_lists.txt", getApplicationContext().MODE_PRIVATE));
+                    outputStreamWriter.write(json);
+                    outputStreamWriter.close();
+                    success = true;
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                return success;
             }
         });
     }

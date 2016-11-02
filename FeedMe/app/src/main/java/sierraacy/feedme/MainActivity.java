@@ -10,8 +10,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Scanner;
 
 public class MainActivity extends AppCompatActivity {
     Button feedme;
@@ -21,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        readFile();
 
         feedme = (Button) findViewById(R.id.btn_feed_me);
         feedme.setOnClickListener(new View.OnClickListener() {
@@ -34,9 +41,24 @@ public class MainActivity extends AppCompatActivity {
                     intent.putExtra("list", restaurants);
                     startActivity(intent);
                 }
-
             }
         });
+    }
+
+    public void readFile() {
+        try {
+            Scanner scan = new Scanner(openFileInput("feedme_lists.txt"));
+            String str = "";
+            while(scan.hasNextLine()) {
+                String line = scan.nextLine();
+                str += line;
+            }
+            Gson gson = new Gson();
+            Object obj = gson.fromJson(str, new TypeToken<ArrayList<Restaurant>>() {}.getType());
+            restaurants = (ArrayList<Restaurant>) obj;
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
