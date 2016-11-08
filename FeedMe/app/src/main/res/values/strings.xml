@@ -2,12 +2,83 @@
     <string name="app_name">FeedMe</string>
     <string-array name="styles_array">
         <item>Select a style!</item>
+        <item>Afghan</item>
+        <item>African</item>
         <item>American</item>
-        <item>Chinese</item>
-        <item>Italian</item>
-        <item>Mexican</item>
-        <item>Deli</item>
+        <item>Arabian</item>
+        <item>Asian Fusion</item>
+        <item>Bars</item>
+        <item>Barbeque</item>
+        <item>Brazilian</item>
+        <item>Breakfast &amp; Brunch</item>
         <item>Buffet</item>
+        <item>Burgers</item>
+        <item>Cafes</item>
+        <item>Cafeteria</item>
+        <item>Cajun/Creole</item>
+        <item>Caribbean</item>
+        <item>Cheesesteaks</item>
+        <item>Chicken Shop</item>
+        <item>Chicken Wings</item>
+        <item>Chinese</item>
+        <item>Creperies</item>
+        <item>Cuban</item>
+        <item>Czech</item>
+        <item>Delis</item>
+        <item>Dim Sum</item>
+        <item>Diners</item>
+        <item>Ethiopian</item>
+        <item>Fast Food</item>
+        <item>Filipino</item>
+        <item>Fish &amp; Chips</item>
+        <item>Fondue</item>
+        <item>Food Court</item>
+        <item>Food Stands</item>
+        <item>French</item>
+        <item>German</item>
+        <item>Gluten-Free</item>
+        <item>Greek</item>
+        <item>Halal</item>
+        <item>Hawaiian</item>
+        <item>Hot Pot</item>
+        <item>Indian</item>
+        <item>Indonesian</item>
+        <item>Italian</item>
+        <item>Japanese</item>
+        <item>Korean</item>
+        <item>Kosher</item>
+        <item>Latin American</item>
+        <item>Mediterranean</item>
+        <item>Falafel</item>
+        <item>Mexican</item>
+        <item>Middle Eastern</item>
+        <item>Mongolian</item>
+        <item>Noodles</item>
+        <item>Pakistani</item>
+        <item>Persian/Iranian</item>
+        <item>Peruvian</item>
+        <item>Pizza</item>
+        <item>Polish</item>
+        <item>Portuguese</item>
+        <item>Poutineries</item>
+        <item>Ramen</item>
+        <item>Salad</item>
+        <item>Sandwiches</item>
+        <item>Seafood</item>
+        <item>Soul Food</item>
+        <item>Soup</item>
+        <item>Southern</item>
+        <item>Steakhouses</item>
+        <item>Sushi Bars</item>
+        <item>Tacos</item>
+        <item>Tapas</item>
+        <item>Tex-Mex</item>
+        <item>Thai</item>
+        <item>Vegan</item>
+        <item>Vegetarian</item>
+        <item>Vietnamese</item>
+        <item>Wraps</item>
+
     </string-array>
     <string-array name="dining_array">
         <item>Select the dining type!</item>
