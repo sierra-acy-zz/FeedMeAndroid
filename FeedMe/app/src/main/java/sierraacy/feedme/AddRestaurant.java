@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 
@@ -16,6 +17,7 @@ public class AddRestaurant extends AppCompatActivity {
     Button save, cancel;
     EditText name;
     Spinner style, type, price;
+    CheckBox hasMeal, hasDessert, hasDrinks;
     Restaurant res;
     int position;
 
@@ -30,6 +32,9 @@ public class AddRestaurant extends AppCompatActivity {
         save = (Button) findViewById(R.id.save);
         cancel = (Button) findViewById(R.id.cancel);
         name = (EditText) findViewById(R.id.edit_rest);
+        hasMeal = (CheckBox) findViewById(R.id.meal);
+        hasDessert = (CheckBox) findViewById(R.id.dessert);
+        hasDrinks = (CheckBox) findViewById(R.id.drinks);
 
 
         style = (Spinner) findViewById(R.id.style);
@@ -50,11 +55,11 @@ public class AddRestaurant extends AppCompatActivity {
         priceAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         price.setAdapter(priceAdapter);
 
+
         res = ((Restaurant)intent.getSerializableExtra("restaurant"));
         position = intent.getIntExtra("position", -1);
         if(res != null)
             editRestaurant();
-
 
 
         save.setOnClickListener(new View.OnClickListener(){
@@ -63,6 +68,10 @@ public class AddRestaurant extends AppCompatActivity {
                 String restName = name.getText().toString();
                 String restStyle = style.getSelectedItem().toString();
                 String restType = type.getSelectedItem().toString();
+                boolean restHasMeal = hasMeal.isChecked();
+                boolean restHasDessert = hasDessert.isChecked();
+                boolean restHasDrinks = hasDrinks.isChecked();
+
                 //We will default the price to 1 if they do not select anything.
                 String restPrice = "$";
                 if(!price.getSelectedItem().toString().equals("Select the price!"))
@@ -75,6 +84,9 @@ public class AddRestaurant extends AppCompatActivity {
                     res.style = restStyle;
                     res.diningType = restType;
                     res.priceRange = restPrice;
+                    res.hasMeal = restHasMeal;
+                    res.hasDessert = restHasDessert;
+                    res.hasDrinks = restHasDrinks;
                     Bundle b = new Bundle();
                     b.putSerializable("newRest", res);
                     b.putInt("position", position);
@@ -83,7 +95,8 @@ public class AddRestaurant extends AppCompatActivity {
                     finish();
                 }
                 else {
-                    Restaurant newRest = new Restaurant(restName, restStyle, restType, restPrice);
+                    Restaurant newRest = new Restaurant(restName, restStyle, restType, restPrice,
+                            restHasMeal, restHasDessert, restHasDrinks);
                     Intent intent = new Intent(getApplicationContext(), EditRestaurant.class);
                     Bundle b = new Bundle();
                     b.putSerializable("newRest", newRest);
@@ -109,6 +122,9 @@ public class AddRestaurant extends AppCompatActivity {
         style.setSelection(looping(R.array.styles_array, res.style));
         type.setSelection(looping(R.array.dining_array, res.diningType));
         price.setSelection(looping(R.array.price_array, res.priceRange));
+        hasMeal.setChecked(res.hasMeal);
+        hasDessert.setChecked(res.hasDessert);
+        hasDrinks.setChecked(res.hasDrinks);
     }
 
     public int looping(int array, String type){

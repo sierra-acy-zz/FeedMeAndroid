@@ -12,13 +12,20 @@ public class Restaurant implements Serializable {
     String style;
     String diningType;
     String priceRange;
+    boolean hasMeal;
+    boolean hasDessert;
+    boolean hasDrinks;
     URL yelpSearch;
 
-    public Restaurant(String name, String style, String diningType, String priceRange) {
+    public Restaurant(String name, String style, String diningType, String priceRange,
+                      boolean hasMeal, boolean hasDessert, boolean hasDrinks) {
         this.name = name;
         this.style = style;
         this.diningType = diningType;
         this.priceRange = priceRange;
+        this.hasMeal = hasMeal;
+        this.hasDessert = hasDessert;
+        this.hasDrinks = hasDrinks;
     }
 
 
