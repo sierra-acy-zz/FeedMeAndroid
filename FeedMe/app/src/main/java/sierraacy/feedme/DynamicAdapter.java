@@ -96,6 +96,7 @@ public class DynamicAdapter extends BaseAdapter {
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), AddRestaurant.class);
                 intent.putExtra("restaurant", restaruantList.get(restPos));
+                intent.putExtra("position", restPos);
                 ((Activity) context).startActivityForResult(intent, 1);
 
             }

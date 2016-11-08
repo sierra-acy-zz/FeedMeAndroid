@@ -17,6 +17,7 @@ public class AddRestaurant extends AppCompatActivity {
     EditText name;
     Spinner style, type, price;
     Restaurant res;
+    int position;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,8 +51,11 @@ public class AddRestaurant extends AppCompatActivity {
         price.setAdapter(priceAdapter);
 
         res = ((Restaurant)intent.getSerializableExtra("restaurant"));
+        position = intent.getIntExtra("position", -1);
         if(res != null)
             editRestaurant();
+
+
 
         save.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -65,14 +69,28 @@ public class AddRestaurant extends AppCompatActivity {
                      restPrice = price.getSelectedItem().toString();
 
 
-
-                Restaurant newRest = new Restaurant(restName, restStyle, restType, restPrice);
-                Intent intent = new Intent(getApplicationContext(), EditRestaurant.class);
-                Bundle b = new Bundle();
-                b.putSerializable("newRest", newRest);
-                intent.putExtras(b);
-                setResult(RESULT_OK, intent);
-                finish();
+                if(res != null){
+                    Intent intent = new Intent(getApplicationContext(), EditRestaurant.class);
+                    res.name = restName;
+                    res.style = restStyle;
+                    res.diningType = restType;
+                    res.priceRange = restPrice;
+                    Bundle b = new Bundle();
+                    b.putSerializable("newRest", res);
+                    b.putInt("position", position);
+                    intent.putExtras(b);
+                    setResult(RESULT_OK, intent);
+                    finish();
+                }
+                else {
+                    Restaurant newRest = new Restaurant(restName, restStyle, restType, restPrice);
+                    Intent intent = new Intent(getApplicationContext(), EditRestaurant.class);
+                    Bundle b = new Bundle();
+                    b.putSerializable("newRest", newRest);
+                    intent.putExtras(b);
+                    setResult(RESULT_OK, intent);
+                    finish();
+                }
             }
 
         });

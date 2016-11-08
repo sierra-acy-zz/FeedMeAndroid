@@ -92,6 +92,9 @@ public class EditRestaurant extends AppCompatActivity {
         if(resultCode == RESULT_OK){
             if(requestCode == 1){
                 Restaurant rest = (Restaurant) intent.getSerializableExtra("newRest");
+                int position = intent.getIntExtra("position", -1);
+                if(position != -1)
+                    listAdapter.removeItem(position);
                 listAdapter.addItem(rest);
                 listAdapter.notifyDataSetChanged();
             }
