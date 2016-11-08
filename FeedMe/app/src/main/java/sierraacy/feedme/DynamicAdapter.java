@@ -1,11 +1,14 @@
 package sierraacy.feedme;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -24,9 +27,12 @@ import java.util.ArrayList;
 public class DynamicAdapter extends BaseAdapter {
     private LayoutInflater layoutInflater;
     private ArrayList<Restaurant> restaruantList = new ArrayList<>();
+    ImageButton edit, delete;
+    Context context;
 
     public DynamicAdapter(Context mContext) {
         layoutInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        context = mContext;
     }
 
     public void createList(ArrayList<Restaurant> restaurantList) {
@@ -62,7 +68,7 @@ public class DynamicAdapter extends BaseAdapter {
         return position;
     }
 
-    public ArrayList<Restaurant> getRestaruantList(){
+    public ArrayList<Restaurant> getRestaurantList(){
         return restaruantList;
     }
 
@@ -76,9 +82,33 @@ public class DynamicAdapter extends BaseAdapter {
 
     protected View bindView(View theView, int position, ViewGroup parent) {
         Restaurant restaurant = (Restaurant) getItem(position);
+        final int restPos = position;
+
 
         TextView theTextView = (TextView) theView.findViewById(R.id.restaurant_name);
         theTextView.setText(restaurant.name);
+
+        edit = (ImageButton) theView.findViewById(R.id.btn_edit);
+        delete = (ImageButton) theView.findViewById(R.id.btn_delete);
+
+        edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), AddRestaurant.class);
+                intent.putExtra("restaurant", restaruantList.get(restPos));
+                ((Activity) context).startActivityForResult(intent, 1);
+
+            }
+        });
+
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                restaruantList.remove(restPos);
+                notifyDataSetChanged();
+            }
+        });
+
 
         return theView;
     }

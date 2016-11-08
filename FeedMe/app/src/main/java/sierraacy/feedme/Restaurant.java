@@ -11,10 +11,10 @@ public class Restaurant implements Serializable {
     String name;
     String style;
     String diningType;
-    int priceRange;
+    String priceRange;
     URL yelpSearch;
 
-    public Restaurant(String name, String style, String diningType, int priceRange) {
+    public Restaurant(String name, String style, String diningType, String priceRange) {
         this.name = name;
         this.style = style;
         this.diningType = diningType;

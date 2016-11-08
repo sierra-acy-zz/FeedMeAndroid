@@ -36,5 +36,16 @@
         android:layout_below="@+id/btn_feed_me"
         android:layout_centerHorizontal="true" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/gray_rounded"
+        android:text="start over!"
+        android:padding="10dp"
+        android:textSize="35sp"
+        android:layout_below="@+id/picked_rest"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="86dp"
+        android:id="@+id/start_over" />
 
 </RelativeLayout>

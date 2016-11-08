@@ -57,7 +57,7 @@ public class EditRestaurant extends AppCompatActivity {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ArrayList<Restaurant> restaurants = listAdapter.getRestaruantList();
+                ArrayList<Restaurant> restaurants = listAdapter.getRestaurantList();
                 writeFile(restaurants);
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 intent.putExtra("restaurantList", restaurants);
