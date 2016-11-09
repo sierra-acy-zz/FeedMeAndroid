@@ -8,6 +8,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -20,6 +21,7 @@ import java.util.Scanner;
 
 public class MainActivity extends AppCompatActivity {
     Button feedme;
+    boolean checkedMeal, checkedDessert, checkedDrinks;
     ArrayList<Restaurant> restaurants = new ArrayList<>();
 
     @Override
@@ -28,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         readFile();
-
         feedme = (Button) findViewById(R.id.btn_feed_me);
         feedme.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -37,8 +38,14 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "You have no restaurants.", Toast.LENGTH_SHORT).show();
                 }
                 else {
+                    checkedMeal = ((CheckBox) findViewById(R.id.chk_meal)).isChecked();
+                    checkedDessert = ((CheckBox) findViewById(R.id.chk_dessert)).isChecked();
+                    checkedDrinks = ((CheckBox) findViewById(R.id.chk_drinks)).isChecked();
                     Intent intent = new Intent(getApplicationContext(), Main2Activity.class);
                     intent.putExtra("list", restaurants);
+                    intent.putExtra("checkedMeal", checkedMeal);
+                    intent.putExtra("checkedDessert", checkedDessert);
+                    intent.putExtra("checkedDrinks", checkedDrinks);
                     startActivity(intent);
                 }
             }

@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -16,6 +17,7 @@ public class Main2Activity extends AppCompatActivity {
     Button feedMe;
     TextView picked;
     ArrayList<Restaurant> restList;
+    boolean checkedMeal, checkedDessert, checkedDrinks;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,8 +29,17 @@ public class Main2Activity extends AppCompatActivity {
 
         Intent intent = getIntent();
         restList = (ArrayList<Restaurant>) intent.getSerializableExtra("list");
-        Restaurant r = getRestaurant();
-        picked.setText(r.name);
+        checkedMeal = intent.getBooleanExtra("checkedMeal", false);
+        checkedDessert = intent.getBooleanExtra("checkedDessert", false);
+        checkedDrinks = intent.getBooleanExtra("checkedDrinks", false);
+
+        Restaurant rest;
+        if(checkedMeal || checkedDessert || checkedDrinks) {
+            restList = buildList();
+        }
+        rest = getRestaurant();
+
+        picked.setText(rest.name);
 
         feedMe.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,5 +56,17 @@ public class Main2Activity extends AppCompatActivity {
         Restaurant r = restList.get(rest);
         return r;
 
+    }
+
+    public ArrayList<Restaurant> buildList() {
+        ArrayList<Restaurant> filteredList = new ArrayList<Restaurant>();
+        for(int i = 0; i < restList.size(); i++) {
+            Restaurant curr = restList.get(i);
+            if((curr.hasMeal && checkedMeal) || (curr.hasDessert && checkedDessert)
+                    || (curr.hasDrinks && checkedDrinks)) {
+                filteredList.add(curr);
+            }
+        }
+        return filteredList;
     }
 }

@@ -62,6 +62,14 @@
         android:layout_alignStart="@id/chk_meal"
         android:text="Dessert"
         android:textSize="30sp"/>
+    <CheckBox
+        android:id="@+id/chk_drinks"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/chk_dessert"
+        android:layout_alignStart="@id/chk_meal"
+        android:text="Drinks"
+        android:textSize="30sp"/>
 
     <Button
         android:id="@+id/btn_advanced_settings"
