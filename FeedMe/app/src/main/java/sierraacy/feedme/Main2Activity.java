@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Main2Activity extends AppCompatActivity {
-    Button feedMe;
+    Button feedMe, startOver;
     TextView picked;
     ArrayList<Restaurant> restList;
     boolean checkedMeal, checkedDessert, checkedDrinks;
@@ -25,6 +25,7 @@ public class Main2Activity extends AppCompatActivity {
         setContentView(R.layout.activity_main2);
 
         feedMe = (Button) findViewById(R.id.btn_feed_me);
+        startOver = (Button) findViewById(R.id.start_over);
         picked = (TextView) findViewById(R.id.picked_rest);
 
         Intent intent = getIntent();
@@ -46,6 +47,14 @@ public class Main2Activity extends AppCompatActivity {
             public void onClick(View v) {
                 Restaurant rest = getRestaurant();
                 picked.setText(rest.name);
+            }
+        });
+
+        startOver.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
             }
         });
     }

@@ -22,12 +22,19 @@ import java.util.Scanner;
 public class MainActivity extends AppCompatActivity {
     Button feedme;
     boolean checkedMeal, checkedDessert, checkedDrinks;
+    CheckBox meal, dessert, drinks;
     ArrayList<Restaurant> restaurants = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        meal = (CheckBox) findViewById(R.id.chk_meal);
+        dessert = (CheckBox) findViewById(R.id.chk_dessert);
+        drinks = (CheckBox) findViewById(R.id.chk_drinks);
+
+        clearCheckboxes();
 
         readFile();
         feedme = (Button) findViewById(R.id.btn_feed_me);
@@ -38,9 +45,9 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "You have no restaurants.", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    checkedMeal = ((CheckBox) findViewById(R.id.chk_meal)).isChecked();
-                    checkedDessert = ((CheckBox) findViewById(R.id.chk_dessert)).isChecked();
-                    checkedDrinks = ((CheckBox) findViewById(R.id.chk_drinks)).isChecked();
+                    checkedMeal = meal.isChecked();
+                    checkedDessert = dessert.isChecked();
+                    checkedDrinks = drinks.isChecked();
                     Intent intent = new Intent(getApplicationContext(), Main2Activity.class);
                     intent.putExtra("list", restaurants);
                     intent.putExtra("checkedMeal", checkedMeal);
@@ -91,5 +98,11 @@ public class MainActivity extends AppCompatActivity {
 
             }
         }
+    }
+
+    public void clearCheckboxes() {
+        meal.setChecked(false);
+        dessert.setChecked(false);
+        drinks.setChecked(false);
     }
 }
