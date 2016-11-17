@@ -19,7 +19,8 @@
             android:name=".EditRestaurant"
             android:parentActivityName=".MainActivity" />
         <activity android:name=".AddRestaurant" />
-        <activity android:name=".Main2Activity"></activity>
+        <activity android:name=".Main2Activity" />
+        <activity android:name=".AdvancedFilters"></activity>
     </application>
 
 </manifest>
