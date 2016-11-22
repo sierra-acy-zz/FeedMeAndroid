@@ -11,6 +11,7 @@ import org.w3c.dom.Text;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
 
 public class Main2Activity extends AppCompatActivity {
@@ -18,6 +19,7 @@ public class Main2Activity extends AppCompatActivity {
     TextView picked;
     ArrayList<Restaurant> restList;
     boolean checkedMeal, checkedDessert, checkedDrinks;
+    HashMap<String, Boolean> filters;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,14 +32,15 @@ public class Main2Activity extends AppCompatActivity {
 
         Intent intent = getIntent();
         restList = (ArrayList<Restaurant>) intent.getSerializableExtra("list");
-        checkedMeal = intent.getBooleanExtra("checkedMeal", false);
-        checkedDessert = intent.getBooleanExtra("checkedDessert", false);
-        checkedDrinks = intent.getBooleanExtra("checkedDrinks", false);
+//        checkedMeal = intent.getBooleanExtra("checkedMeal", false);
+//        checkedDessert = intent.getBooleanExtra("checkedDessert", false);
+//        checkedDrinks = intent.getBooleanExtra("checkedDrinks", false);
+        filters = (HashMap<String, Boolean>) intent.getSerializableExtra("filters");
 
         Restaurant rest;
-        if(checkedMeal || checkedDessert || checkedDrinks) {
+//        if(checkedMeal || checkedDessert || checkedDrinks) {
             restList = buildList();
-        }
+//        }
         rest = getRestaurant();
 
         picked.setText(rest.name);
@@ -70,11 +73,17 @@ public class Main2Activity extends AppCompatActivity {
     public ArrayList<Restaurant> buildList() {
         ArrayList<Restaurant> filteredList = new ArrayList<Restaurant>();
         for(int i = 0; i < restList.size(); i++) {
-            Restaurant curr = restList.get(i);
-            if((curr.hasMeal && checkedMeal) || (curr.hasDessert && checkedDessert)
-                    || (curr.hasDrinks && checkedDrinks)) {
-                filteredList.add(curr);
+            //style, dining type, price range, meal, dessert, drinks
+            Restaurant r = restList.get(i);
+            if(filters.get(r.style) && filters.get(r.diningType) && filters.get(r.priceRange)
+                    && r.hasMeal == filters.get("meal") && r.hasDrinks == filters.get("drinks")
+                    && r.hasDessert == filters.get("dessert")) { //CHANGE TO SPINNER
+                filteredList.add(r);
             }
+//            if((r.hasMeal && checkedMeal) || (r.hasDessert && checkedDessert)
+//                    || (r.hasDrinks && checkedDrinks)) {
+//                filteredList.add(r);
+//            }
         }
         return filteredList;
     }

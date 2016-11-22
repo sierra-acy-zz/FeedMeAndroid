@@ -36,91 +36,112 @@
         <Spinner
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/style">
+            android:id="@+id/style_advanced">
         </Spinner>
 
     </LinearLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Dining Type"
-        android:textSize="20sp"
-        android:layout_marginEnd="20dp"
-        android:textColor="#000000"/>
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Dining Type"-->
+        <!--android:textSize="20sp"-->
+        <!--android:layout_marginEnd="20dp"-->
+        <!--android:textColor="#000000"/>-->
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:id="@+id/sit_down_layout">
-        <CheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/chk_sit_down">
-        </CheckBox>
+        android:orientation="horizontal">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sit down"
+            android:text="Dining Type"
             android:textSize="20sp"
             android:layout_marginEnd="20dp"
             android:textColor="#000000"/>
+
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/dining_type_advanced">
+        </Spinner>
+
     </LinearLayout>
+    <!--<LinearLayout-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="horizontal"-->
+        <!--android:id="@+id/sit_down_layout">-->
+        <!--<CheckBox-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:id="@+id/chk_sit_down">-->
+        <!--</CheckBox>-->
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Sit down"-->
+            <!--android:textSize="20sp"-->
+            <!--android:layout_marginEnd="20dp"-->
+            <!--android:textColor="#000000"/>-->
+    <!--</LinearLayout>-->
+
+    <!--<LinearLayout-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="horizontal"-->
+        <!--android:id="@+id/takeout_layout">-->
+        <!--<CheckBox-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:id="@+id/chk_takeout">-->
+        <!--</CheckBox>-->
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Takeout"-->
+            <!--android:textSize="20sp"-->
+            <!--android:layout_marginEnd="20dp"-->
+            <!--android:textColor="#000000"/>-->
+    <!--</LinearLayout>-->
+
+    <!--<LinearLayout-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="horizontal"-->
+        <!--android:id="@+id/fast_food_layout">-->
+        <!--<CheckBox-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:id="@+id/chk_fast_food">-->
+        <!--</CheckBox>-->
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Fast Food"-->
+            <!--android:textSize="20sp"-->
+            <!--android:layout_marginEnd="20dp"-->
+            <!--android:textColor="#000000"/>-->
+    <!--</LinearLayout>-->
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:id="@+id/takeout_layout">
-        <CheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/chk_takeout">
-        </CheckBox>
+        android:orientation="horizontal">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Takeout"
+            android:text="Max Price"
             android:textSize="20sp"
             android:layout_marginEnd="20dp"
             android:textColor="#000000"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:id="@+id/fast_food_layout">
-        <CheckBox
+        <Spinner
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/chk_fast_food">
-        </CheckBox>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Fast Food"
-            android:textSize="20sp"
-            android:layout_marginEnd="20dp"
-            android:textColor="#000000"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:id="@+id/price_layout">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Price"
-            android:textSize="20sp"
-            android:layout_marginEnd="20dp"
-            android:textColor="#000000"/>
-        <SeekBar
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:id="@+id/max_price">
+        </Spinner>
         <!--<include layout="@layout/double_seek_bar"/>-->
     </LinearLayout>
 

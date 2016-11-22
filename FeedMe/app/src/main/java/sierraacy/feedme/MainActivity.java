@@ -17,14 +17,19 @@ import com.google.gson.reflect.TypeToken;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
 import java.util.Scanner;
 
 public class MainActivity extends AppCompatActivity {
-    Button feedme;
+    Button feedme, advancedFilters;
     boolean checkedMeal, checkedDessert, checkedDrinks;
     CheckBox meal, dessert, drinks;
     ArrayList<Restaurant> restaurants = new ArrayList<>();
+    final int EDIT_CODE = 1;
+    final int FILTER_CODE = 2;
+    final int NUM_BASIC_FILTERS = 3;
+    HashMap<String, Boolean> filters;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +45,12 @@ public class MainActivity extends AppCompatActivity {
 
         clearCheckboxes();
 
+        int capacity = getResources().getStringArray(R.array.styles_array).length;
+        capacity += getResources().getStringArray(R.array.price_array).length;
+        capacity += getResources().getStringArray(R.array.dining_array).length;
+        capacity += NUM_BASIC_FILTERS;
+        filters = new HashMap<String, Boolean>(capacity);
+
         readFile();
         feedme = (Button) findViewById(R.id.btn_feed_me);
         feedme.setOnClickListener(new View.OnClickListener() {
@@ -49,16 +60,30 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "You have no restaurants.", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    checkedMeal = meal.isChecked();
-                    checkedDessert = dessert.isChecked();
-                    checkedDrinks = drinks.isChecked();
+                    filters.put("meal", meal.isChecked());
+                    filters.put("dessert", dessert.isChecked());
+                    filters.put("drinks", drinks.isChecked());
+//                    checkedMeal = meal.isChecked();
+//                    checkedDessert = dessert.isChecked();
+//                    checkedDrinks = drinks.isChecked();
+
                     Intent intent = new Intent(getApplicationContext(), Main2Activity.class);
                     intent.putExtra("list", restaurants);
-                    intent.putExtra("checkedMeal", checkedMeal);
-                    intent.putExtra("checkedDessert", checkedDessert);
-                    intent.putExtra("checkedDrinks", checkedDrinks);
+//                    intent.putExtra("checkedMeal", checkedMeal);
+//                    intent.putExtra("checkedDessert", checkedDessert);
+//                    intent.putExtra("checkedDrinks", checkedDrinks);
+                    intent.putExtra("filters", filters);
                     startActivity(intent);
                 }
+            }
+        });
+
+        advancedFilters = (Button) findViewById(R.id.btn_advanced_filters);
+        advancedFilters.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), AdvancedFilters.class);
+                startActivityForResult(intent, FILTER_CODE);
             }
         });
     }
@@ -90,16 +115,18 @@ public class MainActivity extends AppCompatActivity {
             //open settings
             Intent intent = new Intent(this, EditRestaurant.class);
             intent.putExtra("restaurants", restaurants);
-            startActivityForResult(intent, 1);
+            startActivityForResult(intent, EDIT_CODE);
         }
         return super.onOptionsItemSelected(item);
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent intent){
         if(resultCode == RESULT_OK){
-            if(requestCode == 1){
+            if(requestCode == EDIT_CODE){
                 restaurants = (ArrayList<Restaurant>) intent.getSerializableExtra("restaurantList");
-
+            }
+            else if(requestCode == FILTER_CODE) {
+                filters = (HashMap<String, Boolean>) intent.getSerializableExtra("advanced_filters");
             }
         }
     }

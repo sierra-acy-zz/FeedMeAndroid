@@ -72,14 +72,14 @@
         android:textSize="30sp"/>
 
     <Button
-        android:id="@+id/btn_advanced_settings"
+        android:id="@+id/btn_advanced_filters"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/chk_dessert"
         android:layout_marginTop="100dp"
         android:layout_centerHorizontal="true"
         android:padding="15dp"
-        android:text="Advanced Settings"
+        android:text="Advanced Filters"
         android:textSize="25sp"
         android:textAllCaps="false"
         android:background="@drawable/gray_rounded"/>

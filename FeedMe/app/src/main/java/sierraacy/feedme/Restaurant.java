@@ -15,6 +15,7 @@ public class Restaurant implements Serializable {
     boolean hasMeal;
     boolean hasDessert;
     boolean hasDrinks;
+
     URL yelpSearch;
 
     public Restaurant(String name, String style, String diningType, String priceRange,
