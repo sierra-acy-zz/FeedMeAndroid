@@ -6,12 +6,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Random;
 
 public class Main2Activity extends AppCompatActivity {
@@ -19,7 +22,8 @@ public class Main2Activity extends AppCompatActivity {
     TextView picked;
     ArrayList<Restaurant> restList;
     boolean checkedMeal, checkedDessert, checkedDrinks;
-    HashMap<String, Boolean> filters;
+//    HashMap<String, Boolean> filters;
+    AppliedFilters filters;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,15 +39,17 @@ public class Main2Activity extends AppCompatActivity {
 //        checkedMeal = intent.getBooleanExtra("checkedMeal", false);
 //        checkedDessert = intent.getBooleanExtra("checkedDessert", false);
 //        checkedDrinks = intent.getBooleanExtra("checkedDrinks", false);
-        filters = (HashMap<String, Boolean>) intent.getSerializableExtra("filters");
+        filters = (AppliedFilters) intent.getSerializableExtra("filters");
 
         Restaurant rest;
 //        if(checkedMeal || checkedDessert || checkedDrinks) {
             restList = buildList();
 //        }
         rest = getRestaurant();
-
-        picked.setText(rest.name);
+        if(rest == null)
+            picked.setText("There are no matches.");
+        else
+            picked.setText(rest.name);
 
         feedMe.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,28 +69,85 @@ public class Main2Activity extends AppCompatActivity {
     }
 
     public Restaurant getRestaurant(){
+        if(restList.size() == 0) {
+            return null;
+        }
         Random rand = new Random();
         int rest = rand.nextInt(restList.size());
-        Restaurant r = restList.get(rest);
-        return r;
-
+        return restList.get(rest);
     }
 
     public ArrayList<Restaurant> buildList() {
         ArrayList<Restaurant> filteredList = new ArrayList<Restaurant>();
         for(int i = 0; i < restList.size(); i++) {
-            //style, dining type, price range, meal, dessert, drinks
             Restaurant r = restList.get(i);
-            if(filters.get(r.style) && filters.get(r.diningType) && filters.get(r.priceRange)
-                    && r.hasMeal == filters.get("meal") && r.hasDrinks == filters.get("drinks")
-                    && r.hasDessert == filters.get("dessert")) { //CHANGE TO SPINNER
+            //needs to match at least 1 style
+            //needs to match at least 1 dining type
+            //needs to match price
+            //needs to match all gen
+
+            if(checkStyle(r) && checkDining(r) && checkPrice(r) && checkGeneral(r)) {
                 filteredList.add(r);
             }
-//            if((r.hasMeal && checkedMeal) || (r.hasDessert && checkedDessert)
-//                    || (r.hasDrinks && checkedDrinks)) {
-//                filteredList.add(r);
-//            }
         }
         return filteredList;
+    }
+
+    public boolean checkStyle(Restaurant r) {
+        boolean ret = false;
+        if(!filters.styles.isEmpty() && filters.styles.contains(r.style)) {
+            ret = true;
+        }
+        else if(filters.styles.isEmpty()) {
+            ret = true;
+        }
+        return ret;
+    }
+
+    public boolean checkDining(Restaurant r) {
+        boolean ret = false;
+        if(!filters.dining.isEmpty() && filters.dining.contains(r.diningType)) {
+            ret = true;
+        }
+        else if(filters.dining.isEmpty()) {
+            ret = true;
+        }
+        return ret;
+    }
+
+    public boolean checkPrice(Restaurant r) {
+        boolean ret = false;
+        if(!filters.price.isEmpty() && filters.price.contains(r.priceRange)) {
+            ret = true;
+        }
+        else if(filters.price.isEmpty()) {
+            ret = true;
+        }
+        return ret;
+    }
+
+    public boolean checkGeneral(Restaurant r) {
+        //if meal checked and restaurant matches, move on
+        //if meal not checked, move on
+        //if meal checked and restaurant doesn't match, skip
+        boolean meal = false;
+        if(!filters.general.isEmpty() && filters.general.contains("meal") && r.hasMeal)
+            meal = true;
+        else if(!filters.general.contains("meal"))
+            meal = true;
+
+        boolean dessert = false;
+        if(!filters.general.isEmpty() && filters.general.contains("dessert") && r.hasDessert)
+            dessert = true;
+        else if(!filters.general.contains("dessert"))
+            dessert = true;
+
+        boolean drinks = false;
+        if(!filters.general.isEmpty() && filters.general.contains("drinks") && r.hasDrinks)
+            drinks = true;
+        else if(!filters.general.contains("drinks"))
+            drinks = true;
+
+        return meal && dessert && drinks;
     }
 }

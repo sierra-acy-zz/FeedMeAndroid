@@ -151,11 +151,11 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/btn_save_advanced"
+            android:id="@+id/btn_apply_advanced"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="60dp"
-            android:text="Save"
+            android:text="Apply"
             android:background="@drawable/red_rounded"/>
 
         <Button

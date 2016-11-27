@@ -10,20 +10,29 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+import java.util.function.BiConsumer;
 
 public class AdvancedFilters extends AppCompatActivity {
 
     Spinner style_view, dining_type_view, price_view;
 //    CheckBox sitdown_view, takeout_view, fastfood_view;
-    Button save, cancel;
+    Button apply, cancel;
+//    HashMap<String, Boolean> filters;
+    AppliedFilters filters;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_advanced_filters);
 
-        save = (Button) findViewById(R.id.btn_save_advanced);
+        apply = (Button) findViewById(R.id.btn_apply_advanced);
         cancel = (Button) findViewById(R.id.btn_cancel_advanced);
 
         style_view = (Spinner) findViewById(R.id.style_advanced);
@@ -48,26 +57,34 @@ public class AdvancedFilters extends AppCompatActivity {
         priceAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         price_view.setAdapter(priceAdapter);
 
-        save.setOnClickListener(new View.OnClickListener() {
+        Intent intent = getIntent();
+//        filters = (HashMap<String, Boolean>) intent.getSerializableExtra("filters");
+        filters = (AppliedFilters) intent.getSerializableExtra("filters");
+        if(filters != null) {
+            populate();
+        }
+
+        apply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int capacity = getResources().getStringArray(R.array.styles_array).length;
-                capacity += getResources().getStringArray(R.array.price_array).length;
-                capacity += getResources().getStringArray(R.array.dining_array).length;
-                HashMap<String, Boolean> filters = new HashMap<String, Boolean>(capacity);
-
-                String style = style_view.getSelectedItem().toString();
-                filters.put(style, true);
+//                String style = style_view.getSelectedItem().toString();
+                String selected = style_view.getSelectedItem().toString();
+                if(!selected.equals("Select a style!"))
+                    filters.styles.add(selected);
 
 //                filters.put("sitdown", sitdown_view.isChecked());
 //                filters.put("takeout", takeout_view.isChecked());
 //                filters.put("fastfood", fastfood_view.isChecked());
 
-                String type = dining_type_view.getSelectedItem().toString();
-                filters.put(type, true);
+//                String type = dining_type_view.getSelectedItem().toString();
+                selected = dining_type_view.getSelectedItem().toString();
+                if(!selected.equals("Select the dining type!"))
+                    filters.dining.add(selected);
 
-                String price = price_view.getSelectedItem().toString();
-                filters.put(price, true);
+//                String price = price_view.getSelectedItem().toString();
+                selected = price_view.getSelectedItem().toString();
+                if(!selected.equals("Select the price!"))
+                    filters.price.add(selected);
 
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 intent.putExtra("advanced_filters", filters);
@@ -82,5 +99,30 @@ public class AdvancedFilters extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    public void populate() {
+        String[] arr = getResources().getStringArray(R.array.styles_array);
+        for(int i = 0; i < arr.length; i++) {
+            String style = arr[i];
+            if(filters.styles.contains(style)) {
+                style_view.setSelection(0);
+            }
+        }
+
+        arr = getResources().getStringArray(R.array.dining_array);
+        for(int i = 0; i < arr.length; i++) {
+            String style = arr[i];
+            if(filters.styles.contains(style)) {
+                dining_type_view.setSelection(0);
+            }
+        }
+        arr = getResources().getStringArray(R.array.price_array);
+        for(int i = 0; i < arr.length; i++) {
+            String style = arr[i];
+            if(filters.styles.contains(style)) {
+                price_view.setSelection(0);
+            }
+        }
     }
 }

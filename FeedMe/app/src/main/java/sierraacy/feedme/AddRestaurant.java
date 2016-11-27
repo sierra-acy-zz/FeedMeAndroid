@@ -1,5 +1,6 @@
 package sierraacy.feedme;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.support.v7.app.AppCompatActivity;
@@ -27,7 +28,6 @@ public class AddRestaurant extends AppCompatActivity {
         setContentView(R.layout.activity_add_restaurant);
 
         Intent intent = getIntent();
-
 
         save = (Button) findViewById(R.id.save);
         cancel = (Button) findViewById(R.id.cancel);
@@ -76,7 +76,6 @@ public class AddRestaurant extends AppCompatActivity {
                 String restPrice = "$";
                 if(!price.getSelectedItem().toString().equals("Select the price!"))
                      restPrice = price.getSelectedItem().toString();
-
 
                 if(res != null){
                     Intent intent = new Intent(getApplicationContext(), EditRestaurant.class);
@@ -131,11 +130,10 @@ public class AddRestaurant extends AppCompatActivity {
         Resources resources = getResources();
         String[] resArray = resources.getStringArray(array);
         int index = 0;
-        for(int i=0; i<resArray.length; i++){
+        for(int i = 0; i < resArray.length; i++){
             if(resArray[i].equals(type))
                 index = i;
         }
         return index;
     }
-
 }

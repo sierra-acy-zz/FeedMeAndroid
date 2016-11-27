@@ -29,7 +29,8 @@ public class MainActivity extends AppCompatActivity {
     final int EDIT_CODE = 1;
     final int FILTER_CODE = 2;
     final int NUM_BASIC_FILTERS = 3;
-    HashMap<String, Boolean> filters;
+//    HashMap<String, Boolean> filters;
+    AppliedFilters filters;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,11 +46,12 @@ public class MainActivity extends AppCompatActivity {
 
         clearCheckboxes();
 
-        int capacity = getResources().getStringArray(R.array.styles_array).length;
-        capacity += getResources().getStringArray(R.array.price_array).length;
-        capacity += getResources().getStringArray(R.array.dining_array).length;
-        capacity += NUM_BASIC_FILTERS;
-        filters = new HashMap<String, Boolean>(capacity);
+//        int capacity = getResources().getStringArray(R.array.styles_array).length;
+//        capacity += getResources().getStringArray(R.array.price_array).length;
+//        capacity += getResources().getStringArray(R.array.dining_array).length;
+//        capacity += NUM_BASIC_FILTERS;
+//        filters = new HashMap<String, Boolean>(capacity);
+        filters = new AppliedFilters();
 
         readFile();
         feedme = (Button) findViewById(R.id.btn_feed_me);
@@ -60,9 +62,16 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "You have no restaurants.", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    filters.put("meal", meal.isChecked());
-                    filters.put("dessert", dessert.isChecked());
-                    filters.put("drinks", drinks.isChecked());
+                    if(meal.isChecked())
+                        filters.general.add("meal");
+                    if(dessert.isChecked())
+                        filters.general.add("dessert");
+                    if(drinks.isChecked())
+                        filters.general.add("drinks");
+
+//                    filters.put("meal", meal.isChecked());
+//                    filters.put("dessert", dessert.isChecked());
+//                    filters.put("drinks", drinks.isChecked());
 //                    checkedMeal = meal.isChecked();
 //                    checkedDessert = dessert.isChecked();
 //                    checkedDrinks = drinks.isChecked();
@@ -83,6 +92,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), AdvancedFilters.class);
+                intent.putExtra("filters", filters);
                 startActivityForResult(intent, FILTER_CODE);
             }
         });
@@ -126,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
                 restaurants = (ArrayList<Restaurant>) intent.getSerializableExtra("restaurantList");
             }
             else if(requestCode == FILTER_CODE) {
-                filters = (HashMap<String, Boolean>) intent.getSerializableExtra("advanced_filters");
+                filters = (AppliedFilters) intent.getSerializableExtra("advanced_filters");
             }
         }
     }

@@ -33,6 +33,7 @@ public class EditRestaurant extends AppCompatActivity {
     Button add;
     Button save;
     DynamicAdapter listAdapter;
+    final int ADD_CODE = 3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,7 +91,7 @@ public class EditRestaurant extends AppCompatActivity {
 
     public void onActivityResult(int requestCode, int resultCode, Intent intent){
         if(resultCode == RESULT_OK){
-            if(requestCode == 1){
+            if(requestCode == ADD_CODE){
                 Restaurant rest = (Restaurant) intent.getSerializableExtra("newRest");
                 int position = intent.getIntExtra("position", -1);
                 if(position != -1)
