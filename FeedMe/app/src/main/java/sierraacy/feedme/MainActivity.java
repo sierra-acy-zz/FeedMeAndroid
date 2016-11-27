@@ -29,7 +29,6 @@ public class MainActivity extends AppCompatActivity {
     final int EDIT_CODE = 1;
     final int FILTER_CODE = 2;
     final int NUM_BASIC_FILTERS = 3;
-//    HashMap<String, Boolean> filters;
     AppliedFilters filters;
 
     @Override
@@ -44,14 +43,8 @@ public class MainActivity extends AppCompatActivity {
         dessert = (CheckBox) findViewById(R.id.chk_dessert);
         drinks = (CheckBox) findViewById(R.id.chk_drinks);
 
-        clearCheckboxes();
-
-//        int capacity = getResources().getStringArray(R.array.styles_array).length;
-//        capacity += getResources().getStringArray(R.array.price_array).length;
-//        capacity += getResources().getStringArray(R.array.dining_array).length;
-//        capacity += NUM_BASIC_FILTERS;
-//        filters = new HashMap<String, Boolean>(capacity);
         filters = new AppliedFilters();
+        clearFilters();
 
         readFile();
         feedme = (Button) findViewById(R.id.btn_feed_me);
@@ -69,18 +62,8 @@ public class MainActivity extends AppCompatActivity {
                     if(drinks.isChecked())
                         filters.general.add("drinks");
 
-//                    filters.put("meal", meal.isChecked());
-//                    filters.put("dessert", dessert.isChecked());
-//                    filters.put("drinks", drinks.isChecked());
-//                    checkedMeal = meal.isChecked();
-//                    checkedDessert = dessert.isChecked();
-//                    checkedDrinks = drinks.isChecked();
-
                     Intent intent = new Intent(getApplicationContext(), Main2Activity.class);
                     intent.putExtra("list", restaurants);
-//                    intent.putExtra("checkedMeal", checkedMeal);
-//                    intent.putExtra("checkedDessert", checkedDessert);
-//                    intent.putExtra("checkedDrinks", checkedDrinks);
                     intent.putExtra("filters", filters);
                     startActivity(intent);
                 }
@@ -141,9 +124,13 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void clearCheckboxes() {
+    public void clearFilters() {
         meal.setChecked(false);
         dessert.setChecked(false);
         drinks.setChecked(false);
+        filters.general.clear();
+        filters.styles.clear();
+        filters.price.clear();
+        filters.dining.clear();
     }
 }
