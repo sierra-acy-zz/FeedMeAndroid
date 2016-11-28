@@ -17,6 +17,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    packagingOptions {
+        exclude 'META-INF/LICENSE'
+    }
 }
 
 dependencies {
@@ -28,4 +31,10 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.google.code.gson:gson:2.6.2'
     compile 'com.crystal:crystalrangeseekbar:1.0.0'
+    compile 'com.yelp.clientlib:yelp-android:2.0.0'
 }
+
+repositories {
+    mavenCentral()
+}
+

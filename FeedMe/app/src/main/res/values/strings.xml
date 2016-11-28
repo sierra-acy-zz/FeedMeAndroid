@@ -94,4 +94,9 @@
         <item>$$$</item>
         <item>$$$$</item>
     </string-array>
+
+    <string name="consumerKey">anjDO8v7YT1NtJStVjWBIQ</string>
+    <string name="consumerSecret">oh_ETwbxY87xc88_Qgv77MwlXHk</string>
+    <string name="token">fpSvcO76V_XXblEbYjYuu-Iy4A2PlB6e</string>
+    <string name="tokenSecret">B_qUi-o3EmZ1okIZhCdqK1u2rDk</string>
 </resources>
