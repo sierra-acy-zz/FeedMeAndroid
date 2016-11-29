@@ -86,6 +86,7 @@ public class LocationListAdapter extends BaseAdapter {
         TextView location = (TextView) theView.findViewById(R.id.location);
         TextView phone = (TextView) theView.findViewById(R.id.phone);
         RatingBar rating = (RatingBar) theView.findViewById(R.id.location_rating);
+        TextView web = (TextView) theView.findViewById(R.id.website);
 
         name.setText(restaurant.name());
         Location loc = restaurant.location();
@@ -102,6 +103,7 @@ public class LocationListAdapter extends BaseAdapter {
         double newRating = restaurant.rating();
         float usedRating = (float) newRating;
         rating.setRating(usedRating);
+        web.setText(restaurant.mobileUrl());
 
         phone.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,6 +111,15 @@ public class LocationListAdapter extends BaseAdapter {
                 Uri number = Uri.parse("tel:" + restaurant.displayPhone());
                 Intent callIntent = new Intent(Intent.ACTION_DIAL, number);
                 context.startActivity(callIntent);
+            }
+        });
+
+        web.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Uri webpage = Uri.parse(restaurant.mobileUrl());
+                Intent webIntent = new Intent(Intent.ACTION_VIEW, webpage);
+                context.startActivity(webIntent);
             }
         });
 
