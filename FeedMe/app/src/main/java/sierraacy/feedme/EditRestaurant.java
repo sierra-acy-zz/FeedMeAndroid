@@ -37,7 +37,7 @@ public class EditRestaurant extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), AddRestaurant.class);
-                startActivityForResult(intent, 1);
+                startActivityForResult(intent, ADD_CODE);
             }
         });
 

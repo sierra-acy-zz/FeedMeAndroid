@@ -1,6 +1,5 @@
 package sierraacy.feedme;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -8,14 +7,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageButton;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.yelp.clientlib.entities.Business;
 import com.yelp.clientlib.entities.Location;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -35,7 +31,6 @@ public class LocationListAdapter extends BaseAdapter {
 
     public void createList(ArrayList<Business> locationList) {
         this.locationList = locationList;
-
     }
     public void addItem(final Business restaurant) {
         locationList.add(restaurant);
