@@ -22,7 +22,8 @@
             android:parentActivityName=".MainActivity" />
         <activity android:name=".AddRestaurant" />
         <activity android:name=".Main2Activity" />
-        <activity android:name=".AdvancedFilters"></activity>
+        <activity android:name=".AdvancedFilters" />
+        <activity android:name=".LocationsActivity"></activity>
     </application>
 
 </manifest>

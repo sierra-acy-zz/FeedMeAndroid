@@ -3,43 +3,30 @@ package sierraacy.feedme;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.ListViewCompat;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
-import java.io.Serializable;
-import java.lang.reflect.Array;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-
-import static android.R.attr.data;
 
 public class EditRestaurant extends AppCompatActivity {
     Button add;
     Button save;
-    DynamicAdapter listAdapter;
+    RestaurantListAdapter listAdapter;
     final int ADD_CODE = 3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_restaurant);
-        listAdapter = new DynamicAdapter(this);
+        listAdapter = new RestaurantListAdapter(this);
         ListView listView = (ListView)findViewById(R.id.restaurant_list);
         listView.setAdapter(listAdapter);
         Intent intent = getIntent();

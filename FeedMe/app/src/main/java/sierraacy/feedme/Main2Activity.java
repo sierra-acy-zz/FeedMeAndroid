@@ -21,8 +21,6 @@ public class Main2Activity extends AppCompatActivity {
     Button feedMe, startOver;
     TextView picked;
     ArrayList<Restaurant> restList;
-    boolean checkedMeal, checkedDessert, checkedDrinks;
-//    HashMap<String, Boolean> filters;
     AppliedFilters filters;
 
     @Override
@@ -36,15 +34,10 @@ public class Main2Activity extends AppCompatActivity {
 
         Intent intent = getIntent();
         restList = (ArrayList<Restaurant>) intent.getSerializableExtra("list");
-//        checkedMeal = intent.getBooleanExtra("checkedMeal", false);
-//        checkedDessert = intent.getBooleanExtra("checkedDessert", false);
-//        checkedDrinks = intent.getBooleanExtra("checkedDrinks", false);
         filters = (AppliedFilters) intent.getSerializableExtra("filters");
 
         Restaurant rest;
-//        if(checkedMeal || checkedDessert || checkedDrinks) {
-            restList = buildList();
-//        }
+        restList = buildList();
         rest = getRestaurant();
         if(rest == null)
             picked.setText("There are no matches.");
@@ -63,6 +56,15 @@ public class Main2Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        picked.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), LocationsActivity.class);
+                intent.putExtra("name", picked.getText().toString());
                 startActivity(intent);
             }
         });

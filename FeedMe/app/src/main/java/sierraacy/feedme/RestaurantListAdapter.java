@@ -24,29 +24,29 @@ import java.util.ArrayList;
  * Created by sisis on 10/25/2016.
  */
 
-public class DynamicAdapter extends BaseAdapter {
+public class RestaurantListAdapter extends BaseAdapter {
     private LayoutInflater layoutInflater;
-    private ArrayList<Restaurant> restaruantList = new ArrayList<>();
+    private ArrayList<Restaurant> restaurantList = new ArrayList<>();
     ImageButton edit, delete;
     Context context;
 
-    public DynamicAdapter(Context mContext) {
+    public RestaurantListAdapter(Context mContext) {
         layoutInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         context = mContext;
     }
 
     public void createList(ArrayList<Restaurant> restaurantList) {
-        this.restaruantList = restaurantList;
+        this.restaurantList = restaurantList;
 
     }
     public void addItem(final Restaurant restaurant) {
-        restaruantList.add(restaurant);
+        restaurantList.add(restaurant);
         notifyDataSetChanged();
     }
 
     public void removeItem(int position) {
-        restaruantList.remove(position);
-        if (restaruantList.size() > 0) {
+        restaurantList.remove(position);
+        if (restaurantList.size() > 0) {
             notifyDataSetChanged();
         } else {
             notifyDataSetInvalidated();
@@ -55,12 +55,12 @@ public class DynamicAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return restaruantList.size();
+        return restaurantList.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return restaruantList.get(position);
+        return restaurantList.get(position);
     }
 
     @Override
@@ -69,7 +69,7 @@ public class DynamicAdapter extends BaseAdapter {
     }
 
     public ArrayList<Restaurant> getRestaurantList(){
-        return restaruantList;
+        return restaurantList;
     }
 
     @Override
@@ -95,7 +95,7 @@ public class DynamicAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), AddRestaurant.class);
-                intent.putExtra("restaurant", restaruantList.get(restPos));
+                intent.putExtra("restaurant", restaurantList.get(restPos));
                 intent.putExtra("position", restPos);
                 ((Activity) context).startActivityForResult(intent, 1);
 
@@ -105,7 +105,7 @@ public class DynamicAdapter extends BaseAdapter {
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                restaruantList.remove(restPos);
+                restaurantList.remove(restPos);
                 notifyDataSetChanged();
             }
         });
