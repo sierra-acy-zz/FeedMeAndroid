@@ -98,7 +98,6 @@ public class LocationListAdapter extends BaseAdapter {
         double newRating = restaurant.rating();
         float usedRating = (float) newRating;
         rating.setRating(usedRating);
-        web.setText(restaurant.mobileUrl());
 
         phone.setOnClickListener(new View.OnClickListener() {
             @Override
