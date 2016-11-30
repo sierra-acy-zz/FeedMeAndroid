@@ -175,9 +175,13 @@ public class MainActivity extends AppCompatActivity {
             else if(requestCode == FILTER_CODE) {
                 filters = (AppliedFilters) intent.getSerializableExtra("advanced_filters");
                 TextView filterText = (TextView) findViewById(R.id.filter_text);
-                String newText = filterText.getText().toString();
-                newText+=" "+filters.styles.toString()+ ", "+ filters.dining.toString()+ ", " +
-                    filters.price.toString();
+                String newText = "Filters:";
+                if(!filters.styles.isEmpty())
+                    newText += " " + filters.styles.toString();
+                if(!filters.dining.isEmpty())
+                    newText += " " + filters.dining.toString();
+                if(!filters.price.isEmpty())
+                    newText += " " + filters.price.toString();
                 newText = newText.replaceAll("\\[", "");
                 newText = newText.replaceAll("\\]", "");
                 filterText.setText(newText);
