@@ -8,6 +8,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.yelp.clientlib.entities.Business;
+
 import org.w3c.dom.Text;
 
 import java.lang.reflect.Array;
@@ -22,6 +24,7 @@ public class Main2Activity extends AppCompatActivity {
     TextView picked;
     ArrayList<Restaurant> restList;
     AppliedFilters filters;
+    ArrayList<Business> businessList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,14 +38,27 @@ public class Main2Activity extends AppCompatActivity {
         Intent intent = getIntent();
         restList = (ArrayList<Restaurant>) intent.getSerializableExtra("list");
         filters = (AppliedFilters) intent.getSerializableExtra("filters");
+        businessList = (ArrayList<Business>) intent.getSerializableExtra("businesses");
 
-        Restaurant rest;
-        restList = buildList();
-        rest = getRestaurant();
-        if(rest == null)
-            picked.setText("There are no matches.");
-        else
-            picked.setText(rest.name);
+        if(businessList != null) {
+            //do random
+            feedMe.setEnabled(false);
+            Business business = getRandom();
+
+            if (business == null)
+                picked.setText("There are no matches.");
+            else
+                picked.setText(business.name());
+        }
+        else {
+            restList = buildList();
+            Restaurant rest = getRestaurant();
+
+            if (rest == null)
+                picked.setText("There are no matches.");
+            else
+                picked.setText(rest.name);
+        }
 
         feedMe.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,6 +93,15 @@ public class Main2Activity extends AppCompatActivity {
         Random rand = new Random();
         int rest = rand.nextInt(restList.size());
         return restList.get(rest);
+    }
+
+    public Business getRandom() {
+        if(businessList.size() == 0) {
+            return null;
+        }
+        Random rand = new Random();
+        int rest = rand.nextInt(businessList.size());
+        return businessList.get(rest);
     }
 
     public ArrayList<Restaurant> buildList() {

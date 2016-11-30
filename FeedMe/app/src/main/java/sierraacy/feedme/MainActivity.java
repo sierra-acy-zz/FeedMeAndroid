@@ -14,15 +14,24 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.yelp.clientlib.connection.YelpAPI;
+import com.yelp.clientlib.connection.YelpAPIFactory;
+import com.yelp.clientlib.entities.Business;
+import com.yelp.clientlib.entities.SearchResponse;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class MainActivity extends AppCompatActivity {
-    Button feedme, advancedFilters;
+    Button feedme, advancedFilters, somethingNew;
     boolean checkedMeal, checkedDessert, checkedDrinks;
     CheckBox meal, dessert, drinks;
     ArrayList<Restaurant> restaurants = new ArrayList<>();
@@ -30,6 +39,9 @@ public class MainActivity extends AppCompatActivity {
     final int FILTER_CODE = 2;
     final int NUM_BASIC_FILTERS = 3;
     AppliedFilters filters;
+    YelpAPIFactory apiFactory;
+    YelpAPI yelpAPI;
+    ArrayList<Business> businesses;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayUseLogoEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setIcon(R.drawable.rooster_logo_white);
+
 
         meal = (CheckBox) findViewById(R.id.chk_meal);
         dessert = (CheckBox) findViewById(R.id.chk_dessert);
@@ -77,6 +90,46 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), AdvancedFilters.class);
                 intent.putExtra("filters", filters);
                 startActivityForResult(intent, FILTER_CODE);
+            }
+        });
+
+        somethingNew = (Button) findViewById(R.id.btn_random);
+        somethingNew.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                apiFactory = new YelpAPIFactory(getResources().getString(R.string.consumerKey),
+                        getResources().getString(R.string.consumerSecret),
+                        getResources().getString(R.string.token),
+                        getResources().getString(R.string.tokenSecret));
+                yelpAPI = apiFactory.createAPI();
+
+                Map<String, String> params = new HashMap<>();
+
+                // general params
+                params.put("term", "food");
+                params.put("limit", "25");
+                params.put("category_filter", "restaurants,bars,food,coffee");
+
+                Call<SearchResponse> call = yelpAPI.search("Austin", params);
+                Callback<SearchResponse> callback = new Callback<SearchResponse>() {
+                    @Override
+                    public void onResponse(Call<SearchResponse> call, Response<SearchResponse> response) {
+                        SearchResponse searchResponse = response.body();
+                        // Update UI text with the searchResponse.
+                        businesses = searchResponse.businesses();
+                        Intent intent = new Intent(getApplicationContext(), Main2Activity.class);
+                        intent.putExtra("businesses", businesses);
+                        intent.putExtra("list", restaurants);
+                        startActivity(intent);
+                    }
+
+                    @Override
+                    public void onFailure(Call<SearchResponse> call, Throwable t) {
+                        // HTTP error happened, do something to handle it.
+                        Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_LONG).show();
+                    }
+                };
+                call.enqueue(callback);
             }
         });
     }
