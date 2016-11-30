@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -173,6 +174,13 @@ public class MainActivity extends AppCompatActivity {
             }
             else if(requestCode == FILTER_CODE) {
                 filters = (AppliedFilters) intent.getSerializableExtra("advanced_filters");
+                TextView filterText = (TextView) findViewById(R.id.filter_text);
+                String newText = filterText.getText().toString();
+                newText+=" "+filters.styles.toString()+ ", "+ filters.dining.toString()+ ", " +
+                    filters.price.toString();
+                newText = newText.replaceAll("\\[", "");
+                newText = newText.replaceAll("\\]", "");
+                filterText.setText(newText);
             }
         }
     }
