@@ -6,7 +6,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/rooster_logo"
+        android:icon="@drawable/rooster_logo_96"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
