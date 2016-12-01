@@ -6,24 +6,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.EditText;
 import android.widget.Spinner;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
-import java.util.function.BiConsumer;
 
 public class AdvancedFilters extends AppCompatActivity {
 
     Spinner style_view, dining_type_view, price_view;
     Button apply, cancel, clear;
     AppliedFilters filters;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

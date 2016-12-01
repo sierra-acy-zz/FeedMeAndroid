@@ -25,7 +25,6 @@ public class LocationsActivity extends AppCompatActivity {
     YelpAPI yelpAPI;
     ArrayList<Business> businesses;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

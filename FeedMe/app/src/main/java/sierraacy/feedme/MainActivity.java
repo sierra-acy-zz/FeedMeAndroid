@@ -1,7 +1,6 @@
 package sierraacy.feedme;
 
 import android.content.Intent;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -24,7 +23,6 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
 import java.util.Scanner;
 
 import retrofit2.Call;
@@ -33,12 +31,10 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
     Button feedme, advancedFilters, somethingNew;
-    boolean checkedMeal, checkedDessert, checkedDrinks;
     CheckBox meal, dessert, drinks;
     ArrayList<Restaurant> restaurants = new ArrayList<>();
     final int EDIT_CODE = 1;
     final int FILTER_CODE = 2;
-    final int NUM_BASIC_FILTERS = 3;
     AppliedFilters filters;
     YelpAPIFactory apiFactory;
     YelpAPI yelpAPI;

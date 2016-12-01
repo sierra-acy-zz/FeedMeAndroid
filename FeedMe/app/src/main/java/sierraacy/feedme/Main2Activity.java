@@ -6,17 +6,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.yelp.clientlib.entities.Business;
 
-import org.w3c.dom.Text;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Random;
 
 public class Main2Activity extends AppCompatActivity {
@@ -41,7 +34,6 @@ public class Main2Activity extends AppCompatActivity {
         businessList = (ArrayList<Business>) intent.getSerializableExtra("businesses");
 
         if(businessList != null) {
-            //do random
             feedMe.setEnabled(false);
             Business business = getRandom();
 
@@ -108,11 +100,6 @@ public class Main2Activity extends AppCompatActivity {
         ArrayList<Restaurant> filteredList = new ArrayList<Restaurant>();
         for(int i = 0; i < restList.size(); i++) {
             Restaurant r = restList.get(i);
-            //needs to match at least 1 style
-            //needs to match at least 1 dining type
-            //needs to match price
-            //needs to match all gen
-
             if(checkStyle(r) && checkDining(r) && checkPrice(r) && checkGeneral(r)) {
                 filteredList.add(r);
             }
@@ -154,9 +141,6 @@ public class Main2Activity extends AppCompatActivity {
     }
 
     public boolean checkGeneral(Restaurant r) {
-        //if meal checked and restaurant matches, move on
-        //if meal not checked, move on
-        //if meal checked and restaurant doesn't match, skip
         boolean meal = false;
         if(!filters.general.isEmpty() && filters.general.contains("meal") && r.hasMeal)
             meal = true;

@@ -53,7 +53,7 @@ public class EditRestaurant extends AppCompatActivity {
                 finish();
             }
 
-            /* Gson API code pulled from : http://www.vogella.com/tutorials/JavaLibrary-Gson/article.html */
+            /* Gson library code pulled from : http://www.vogella.com/tutorials/JavaLibrary-Gson/article.html */
             public boolean writeFile(ArrayList<Restaurant> restaurants) {
                 OutputStreamWriter outputStreamWriter = null;
                 boolean success = false;

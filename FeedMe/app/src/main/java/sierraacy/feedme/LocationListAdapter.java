@@ -32,19 +32,6 @@ public class LocationListAdapter extends BaseAdapter {
     public void createList(ArrayList<Business> locationList) {
         this.locationList = locationList;
     }
-    public void addItem(final Business restaurant) {
-        locationList.add(restaurant);
-        notifyDataSetChanged();
-    }
-
-    public void removeItem(int position) {
-        locationList.remove(position);
-        if (locationList.size() > 0) {
-            notifyDataSetChanged();
-        } else {
-            notifyDataSetInvalidated();
-        }
-    }
 
     @Override
     public int getCount() {
@@ -59,10 +46,6 @@ public class LocationListAdapter extends BaseAdapter {
     @Override
     public long getItemId(int position) {
         return position;
-    }
-
-    public ArrayList<Business> getLocationList(){
-        return locationList;
     }
 
     @Override
