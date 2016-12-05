@@ -22,6 +22,8 @@ public class RestaurantListAdapter extends BaseAdapter {
     ImageButton edit, delete;
     Context context;
 
+    final int EDIT_CODE = 3;
+
     public RestaurantListAdapter(Context mContext) {
         layoutInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         context = mContext;
@@ -89,7 +91,7 @@ public class RestaurantListAdapter extends BaseAdapter {
                 Intent intent = new Intent(v.getContext(), AddRestaurant.class);
                 intent.putExtra("restaurant", restaurantList.get(restPos));
                 intent.putExtra("position", restPos);
-                ((Activity) context).startActivityForResult(intent, 1);
+                ((Activity) context).startActivityForResult(intent, EDIT_CODE);
 
             }
         });
