@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.yelp.clientlib.connection.YelpAPI;
@@ -53,7 +54,13 @@ public class LocationsActivity extends AppCompatActivity {
                 SearchResponse searchResponse = response.body();
                 // Update UI text with the searchResponse.
                 businesses = searchResponse.businesses();
-                setAdapter();
+                if(businesses.isEmpty()) {
+                    TextView info = (TextView) findViewById(R.id.info_text);
+                    info.setText("There are no matches.");
+                }
+                else {
+                    setAdapter();
+                }
             }
 
             @Override
